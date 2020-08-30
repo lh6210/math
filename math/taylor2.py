@@ -7,65 +7,27 @@ import numpy as np
 import matplotlib.ticker as tck
 
 
-# canvas set-up
+# figure and two axes set-up
 ######################################################################
-fig, ax = plt.subplots(figsize=(10, 4.8))
+fig, axes = plt.subplots(2, 1, figsize=(10, 8))
+
+plt.subplots_adjust(hspace=0.5)
 
 # x, y limit
-ax.set_xlim(-4 * pi, 4 * pi)
-ax.set_ylim(-5, 5)
-
+for i in range(2):
+    axes[i].set_xlim(-3 * pi, 6 * pi)
+    axes[i].set_ylim(-5, 5)
 # draw x-axis
-ax.arrow(-4*pi, 0, 8*pi, 0, length_includes_head=True, head_width=0.2, head_length= 0.7, color='xkcd:almost black'  )
-ax.annotate('X-axis', (3.3*pi, 0.3), color='xkcd:almost black')
-
+    axes[i].arrow(-3*pi, 0, 9*pi, 0, length_includes_head=True, head_width=0.2, head_length= 0.7, color='xkcd:almost black'  )
+    axes[i].annotate('X-axis', (5.5*pi, 0.3), color='xkcd:almost black')
 # draw y-axis
-ax.arrow(0, -5, 0, 10, length_includes_head=True, head_width=0.3, head_length= 0.5, color='xkcd:almost black'  )
-ax.annotate('Y-axis', (0.2, 4.6), color='xkcd:almost black')
+    axes[i].arrow(0, -5, 0, 10, length_includes_head=True, head_width=0.3, head_length= 0.5, color='xkcd:almost black'  )
+    axes[i].annotate('Y-axis', (0.2, 4.3), color='xkcd:almost black')
 ######################################################################
 
 
-#Taylor series functions
+# two axes x ticks and labels set-up
 ######################################################################
-# taylor series of degree 9
-def taylor_sin(x):
-    return x - pow(x, 3)/ fact(3) + pow(x, 5)/fact(5) - pow(x, 7)/fact(7) + pow(x, 9) / fact(9)
-
-# taylor series of degree 2*n + 1
-def taylorN_sin(x, n):
-    if n == 0:
-        return x
-    return pow(-1, n)*pow(x, 2*n+1)/fact(2*n+1) + taylorN_sin(x, n-1)
-######################################################################
-
-
-# graph functions
-######################################################################
-# x and y values
-xv = np.linspace(-4*pi, 4* pi, 100)
-sin_yv= [sin(x) for x in xv]
-taylor9_yv= [taylor_sin(x) for x in xv]
-taylor15_yv= [taylorN_sin(x, 7) for x in xv]
-
-ax.grid(b=True, which= 'major', axis='x')
-
-# function graph
-ax.plot(xv, sin_yv, color='xkcd:bright blue')
-ax.annotate('sin(x)', (7.5, 1.2), color='xkcd:bright blue')
-ax.plot(xv, taylor9_yv, color='xkcd:grass green')
-ax.annotate(r'$Taylor_{9}$(sin, x)', (6.2, 4), color='xkcd:grass green')
-ax.plot(xv, taylor15_yv, color='xkcd:brick red')
-ax.annotate(r'$Taylor_{15}$(sin, x)', (2.3, -4), color='xkcd:brick red')
-######################################################################
-
-
-# x ticks and labels
-######################################################################
-# x-axis ticks
-ax.xaxis.set_major_locator(tck.MultipleLocator(pi/2))
-
-# x-axis ticklabels
-
 def format_func(x, loc):
     x = round(x*2/pi)  # round to an integer
     if x == 0:
@@ -84,9 +46,84 @@ def format_func(x, loc):
         x = str(int(x))
         return r"${0}\pi/2$".format(x)
 
-ax.xaxis.set_major_formatter(tck.FuncFormatter(format_func))
-ax.xaxis.set_tick_params(rotation=-30)
+for i in range(2):
+# x-axis ticks
+    axes[i].xaxis.set_major_locator(tck.MultipleLocator(pi/2))
+# x-axis ticklabels
+    axes[i].xaxis.set_major_formatter(tck.FuncFormatter(format_func))
+    axes[i].xaxis.set_tick_params(rotation=-30)
 ######################################################################
+
+
+#Taylor series functions around x=0
+######################################################################
+# taylor series of degree 9
+def taylor_sin(x):
+    return x - pow(x, 3)/ fact(3) + pow(x, 5)/fact(5) - pow(x, 7)/fact(7) + pow(x, 9) / fact(9)
+
+# taylor series of degree 2*n + 1
+def taylorN_sin(x, n):
+    if n == 0:
+        return x
+    return pow(-1, n)*pow(x, 2*n+1)/fact(2*n+1) + taylorN_sin(x, n-1)
+######################################################################
+
+
+# graph functions on axes[0]
+######################################################################
+# x and y values
+xv = np.linspace(-3*pi, 6* pi, 100)
+sin_yv= [sin(x) for x in xv]
+taylor9_yv= [taylor_sin(x) for x in xv]
+taylor15_yv= [taylorN_sin(x, 7) for x in xv]
+
+axes[0].grid(b=True, which= 'major', axis='x')
+
+# function graph
+axes[0].plot(xv, sin_yv, color='xkcd:bright blue')
+axes[0].annotate('sin(x)', (7.5, 1.2), color='xkcd:bright blue')
+axes[0].plot(xv, taylor9_yv, color='xkcd:grass green')
+axes[0].annotate(r'$Taylor_{9}(sin, x{\in}V_{\epsilon}(0))$', (6.2, 4), color='xkcd:grass green')
+axes[0].plot(xv, taylor15_yv, color='xkcd:brick red')
+axes[0].annotate(r'$Taylor_{15}(sin, x{\in}V_{\epsilon}(0))$', (8.2, -4), color='xkcd:brick red')
+######################################################################
+
+
+#Taylor series functions around x = 3pi
+######################################################################
+## taylor series of degree 9
+#def taylor_sin(x):
+#    return x - pow(x, 3)/ fact(3) + pow(x, 5)/fact(5) - pow(x, 7)/fact(7) + pow(x, 9) / fact(9)
+
+# taylor series of degree 2*n + 1
+def taylorN_sin_around3Pi(x, n):
+    if n == 0:
+        return -(x - 3 * pi)
+    return pow(-1, n+1)*pow(x - 3*pi, 2*n+1)/fact(2*n+1) + taylorN_sin_around3Pi(x, n-1)
+######################################################################
+
+
+# graph functions on axes[1]
+######################################################################
+# x and y values
+#xv1 = np.linspace(-pi, 7* pi, 100)
+sin_yv1= [sin(x) for x in xv]
+taylor9_yv1= [taylorN_sin_around3Pi(x, 4) for x in xv]
+taylor15_yv1= [taylorN_sin_around3Pi(x, 7) for x in xv]
+
+axes[1].grid(b=True, which= 'major', axis='x')
+
+# function graph
+axes[1].plot(xv, sin_yv1, color='xkcd:bright blue')
+axes[1].annotate('sin(x)', (7.5, 1.2), color='xkcd:bright blue')
+axes[1].plot(xv, taylor9_yv1, color='xkcd:grass green')
+axes[1].annotate(r'$Taylor_{9}(sin, x{\in}V_{\epsilon}({3\pi}))$', (4.2, 4), color='xkcd:grass green')
+axes[1].plot(xv, taylor15_yv1, color='xkcd:brick red')
+axes[1].annotate(r'$Taylor_{15}(sin, x{\in}V_{\epsilon}(3{\pi}))$', (1.7, -4), color='xkcd:brick red')
+######################################################################
+
+axes[0].set_title('Taylor series of Sin(x) around x = 0')
+axes[1].set_title(r'Taylor series of Sin(x) around x = $3\pi$')
 
 
 plt.show()
