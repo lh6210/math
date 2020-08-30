@@ -7,4 +7,3 @@ def derivative(fn):
     return g
 
 
-def summation()

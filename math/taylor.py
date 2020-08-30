@@ -9,7 +9,7 @@ fig, ax = plt.subplots()
 ax.set_title(r'$Taylor_{9}(sin, x \in V_{\epsilon}(0))$ vs $sin(\theta)$')
 
 # method 1 to set ticks
-start, end = -2.5*pi, 2.5*pi
+start, end = -3*pi, 3*pi
 ax.set_xlim(start, end)
 ax.xaxis.set_major_locator(tck.MultipleLocator(np.pi / 2))
 
