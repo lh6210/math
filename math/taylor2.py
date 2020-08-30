@@ -2,9 +2,16 @@
 
 from math import factorial as fact
 from math import sin, pi
+import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.ticker as tck
+
+#matplotlib.rc('text', usetex = True)
+#matplotlib.rc('font', **{'family' : "sans-serif"})
+#params= {'text.latex.preamble' : [r'\usepackage{amsmath}']}
+#plt.rcParams.update(params)
+
 
 
 # figure and two axes set-up
@@ -122,8 +129,8 @@ axes[1].plot(xv, taylor15_yv1, color='xkcd:brick red')
 axes[1].annotate(r'$Taylor_{15}(sin, x{\in}V_{\epsilon}(3{\pi}))$', (1.7, -4), color='xkcd:brick red')
 ######################################################################
 
-axes[0].set_title('Taylor series of Sin(x) around x = 0')
-axes[1].set_title(r'Taylor series of Sin(x) around x = $3\pi$')
+axes[0].set_title(r'$n^{th}$ degree Taylor polynomials of Sin(x) at x = 0')
+axes[1].set_title(r'$n^{th}$ degree Taylor polynomials of Sin(x) at x = $3\pi$')
 
 
 plt.show()
