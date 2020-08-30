@@ -50,6 +50,9 @@ ax.plot([-3*pi, 0, 3*pi], [0, 0, 0])
 ax.plot(mx, y1x)
 ax.plot(mx, y2x)
 
-#plt.style.use('ggplot')
 plt.show()
+#plt.draw()
+#loc = ax.get_xticks()
+#lab = ax.get_xmajorticklabels()
+
 
