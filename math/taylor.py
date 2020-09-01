@@ -1,3 +1,9 @@
+
+
+###################################################################
+# In this file, xticks' locations and format are implemented.
+###################################################################
+
 from math import pow, sin, pi
 import matplotlib.ticker as tck
 from math import factorial as fact

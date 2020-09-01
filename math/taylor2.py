@@ -1,17 +1,23 @@
 
 
+######################################################################
+#This document is the comparison of two taylor polynomials of sin(x) located at different points
+#You could see the limitation of taylor polynomials, the x has to be close to point a
+#
+#Think of how to define the taylor polynomial for sin(x)
+#for any x, since sin(x) is sinusoidal, find the coterminal angle of x between 0 and 2pi
+#and then set a = pi would be a good try
+#
+#
+######################################################################
+
+
 from math import factorial as fact
 from math import sin, pi
 import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.ticker as tck
-
-#matplotlib.rc('text', usetex = True)
-#matplotlib.rc('font', **{'family' : "sans-serif"})
-#params= {'text.latex.preamble' : [r'\usepackage{amsmath}']}
-#plt.rcParams.update(params)
-
 
 
 # figure and two axes set-up
