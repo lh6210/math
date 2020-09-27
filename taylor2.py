@@ -138,5 +138,5 @@ axes[1].annotate(r'$Taylor_{15}(sin, x{\in}V_{\epsilon}(3{\pi}))$', (1.7, -4), c
 axes[0].set_title(r'$n^{th}$ degree Taylor polynomials of Sin(x) at x = 0')
 axes[1].set_title(r'$n^{th}$ degree Taylor polynomials of Sin(x) at x = $3\pi$')
 
-
-plt.show()
+plt.savefig("pic_taylor2.jpg", bbox_inches='tight', pad_inches=0)
+#plt.show()
